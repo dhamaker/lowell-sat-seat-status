@@ -1,8 +1,15 @@
 # Status SAT Seats at Lowell
 
-Create a single page for quickly checking status fo SAT test seats at Lowell High School according to College Board. 
+Create a single page for quickly checking status fo SAT test seats at Lowell High School according to College Board.  The query is run on load and the content is updated.  
 
 Always verify availability on official site [SAT Test Center Search](https://satsuite.collegeboard.org/sat/test-center-search)
+
+
+## Testing notes
+
+As the latest update, there were no seats available for the upcoming tests.  I have tested the page with an out of state zipcode where seats are available, so I am highly confident that the page will say "AVAILABLE" when the seat availability changes on College Board.
+
+I show the test date, seat availability, and test school name of the first result (the location closest to the requested zipcode).
 
 ## About the HTML
 
