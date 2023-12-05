@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <header>
+        <title>LHS SAT Availability</title>
+        <style>
+            body {
+                font-family:sans-serif;
+                margin:0 2rem;
+                max-width:44rem;
+                line-height:1.4rem;
+            }
+            header {
+                margin : 3em 0  2em 0;
+            }
+            main {
+                margin: 1em 0;
+            }
+            h2 {
+                font-size:1.25rem;
+                margin:3rem 0 -.75rem 0;
+            }
+            span {
+                display:inline-block;
+                margin: 1rem 2rem 1rem 1rem;
+                font-size:1.5rem;
+                color:#777
+            }
+            span:first-child:after {
+                content: " ";
+            }
+            span:nth-child(2) {
+                color: #000;
+            }
+
+            footer {
+                color: #666;
+                margin-top:3rem;
+            }
+
+
+        </style>
+    </header>
+    <body>
+        <header>
+            <h1>Quick Check of SAT Availability at Lowell</h1>
+            <p>Current available testing seats at Lowell High School according to College Board. Always verify on official site <a href="https://satsuite.collegeboard.org/sat/test-center-search">SAT Test Center Search</a></p>
+        </header>
+        <main>
+            <h2>Availability Status</h2>
+            <p>As of <time></time></p>
+            <script>document.querySelector("time").innerHTML = Date();</script>
+        </main>
+        <footer>
+
+            <p>This page calls collegeboard's JSON API and shows results for specific dates. It lists the first school in the zipcode.</p>
+            <p>It is coded to check for March, May, and June 2024 dates.  To include additional dates, edit the page to request additional dates. </p>
+        </footer>
+    </body>
+
+    <script>
+        /*
+            - CollegeBoard site uses a json query to get test center data.
+            - Query format is 
+               URL: https://aru-test-center-search.cms-prod.collegeboard.org/prod/test-centers
+               Parameters:  date=2024-03-09&zip=94132&country=US
+        */
+        var lowellSeats;
+        async function populate(testDate) {
+            var zipCode = "94132";  // school zipcode such that school is first item in College Board result 
+            const requestURL =
+                "https://aru-test-center-search.cms-prod.collegeboard.org/prod/test-centers?date=" +
+                testDate + "&zip=" + zipCode + "&country=US";
+            const request = new Request(requestURL);
+            const response = await fetch(request);
+            const Availability = await response.json();
+
+            // showAvailability(availabilityData);
+            lowellSeats=Availability[0];
+            lowellSeats.date=testDate;
+
+            const
+
+            //thisTest = "<p><span class='testDate'>" + lowellSeats.date + "</span> <span class='status'>" + lowellSeats.seatAvailability + "</span></p>";
+            //document.querySelector("main").innerHTML=thisTest;
+
+
+            main = document.querySelector("main");
+            p = main.appendChild(document.createElement("p"));
+            date = p.appendChild(document.createElement("span"));
+            thisStatus = p.appendChild(document.createElement("span"));
+            thisName = p.appendChild(document.createElement("span"));
+            thisName.textContent = lowellSeats.name + " " + lowellSeats.code.toString(); 
+            date.textContent = lowellSeats.date;
+            thisStatus.textContent = lowellSeats.seatAvailability ? "AVAILABLE" : "NONE AVAILABLE";
+        }
+
+        // call the populate function for each test date
+        // populate("yyyy-mm-dd");
+        populate("2024-03-09");
+        populate("2024-05-04");
+        populate("2024-06-01");
+
+
+
+        
+        
+</script>
+</html>
