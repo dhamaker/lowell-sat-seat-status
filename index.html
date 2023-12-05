@@ -1,57 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
-    <header>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Unofficial Lowell SAT Availability</title>
         <style>
             body {
                 font-family:sans-serif;
-                margin:0 2rem;
-                max-width:44rem;
+                margin:0;
+                padding:0;
                 line-height:1.4rem;
             }
-            header {
-                margin : 3em 0  2em 0;
-            }
             main {
-                margin: 1em 0;
+                margin: 2rem 2rem;
             }
-            h2 {
+            header {
+                padding : .5rem 2rem .25rem 2rem;
+                background:#efefef;
+            }
+            h1 {
                 font-size:1.25rem;
-                margin:3rem 0 -.75rem 0;
+                line-height:1.25;
+                margin-bottom:0;
+                color:#000;
             }
+            h1 + p {
+                margin-top:.25rem;
+                color:#888;
+                font-size:.875rem;
+            }
+
+            h2 {
+                font-size:1.3rem;
+`           }
+
+            #results {
+                margin:2rem 0;
+            }
+
+            #results p {
+                margin-left: 1rem;
+            }
+
+
             span {
-                display:inline-block;
-                margin: 1rem 2rem 1rem 1rem;
-                font-size:1.5rem;
-                color:#777
+                display:block;
+                margin: 0 .5rem;
+                font-size:1rem;
+                font-size:.875rem;
             }
-            span:first-child:after {
+            span:after {
                 content: " ";
             }
             span:nth-child(2) {
                 color: #000;
+                font-size:1.25rem;
+                line-height:1.6;
             }
 
             footer {
-                color: #666;
-                margin-top:3rem;
+                margin: 2rem;
+            }
+            footer p {
+                color:#888;
+            }
+            cite {
+                margin: 1rem 0 1rem 0;
+                font-size:.875rem;
+            }
+            
+            /* desktop */
+            @media (min-width: 680px) {
+                span {
+                    display:inline-block;
+                    margin: 0rem .5rem;
+                    font-size:1.25rem;
+                    color:#777
+                }
             }
 
-
         </style>
-    </header>
+    </head>
     <body>
         <header>
             <h1>SAT Availability at Lowell (unofficial)</h1>
-            <p>Current available testing seats at Lowell High School according to College Board. Always verify on official site <a href="https://satsuite.collegeboard.org/sat/test-center-search">SAT Test Center Search</a></p>
+            <p>Reload page to update available seats at Lowell High School. Use <a href="https://satsuite.collegeboard.org/sat/test-center-search">SAT Test Center Search</a> for official results.</p>
         </header>
         <main>
-            <h2>Availability Status</h2>
+            <!--<h2>Availability Status</h2>-->
             <p>As of <time></time></p>
             <script>document.querySelector("time").innerHTML = Date();</script>
+            <div id="results">
+                <p><span>YYYY-MM-DD</span><span>NOT AVAILABLE</span><span>LOWELL HS 05689</span></p>
+                <p><span>YYYY-MM-DD</span><span>NOT AVAILABLE</span><span>LOWELL HS 05689</span></p>
+                <p><span>YYYY-MM-DD</span><span>NOT AVAILABLE</span><span>LOWELL HS 05689</span></p>
+            </div>
+            <cite>Source: https://aru-test-center-search.cms-prod.collegeboard.org</cite>
         </main>
         <footer>
-
+            <h2>About</h2>
             <p>This page calls collegeboard's JSON API and shows results for specific dates. It lists the first school in the zipcode.</p>
             <p>It is coded to check for March, May, and June 2024 dates.  To include additional dates, edit the page to request additional dates. </p>
         </footer>
@@ -84,7 +131,7 @@
             //document.querySelector("main").innerHTML=thisTest;
 
 
-            main = document.querySelector("main");
+            main = document.querySelector("#results");
             p = main.appendChild(document.createElement("p"));
             date = p.appendChild(document.createElement("span"));
             thisStatus = p.appendChild(document.createElement("span"));
@@ -96,10 +143,12 @@
 
         // call the populate function for each test date
         // populate("yyyy-mm-dd");
+
+        /*
         populate("2024-03-09");
         populate("2024-05-04");
         populate("2024-06-01");
-
+        */
 
 
         
